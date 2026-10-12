@@ -484,7 +484,10 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
 .pitch .pf{fill:var(--grass);stroke:var(--grass-line)}
 .pitch .pl{fill:none;stroke:var(--grass-line)}
 .pitch .opp{fill:var(--fg-3);transition:opacity .4s}
-.pitch .scan{fill:none;stroke:var(--red-soft);stroke-dasharray:3 4;transition:opacity .4s}
+.pitch .zone{fill:var(--red-a);transition:opacity .4s}
+.pitch .dash{stroke-dasharray:4 4}
+.pitch .press{fill:none;stroke:var(--red-soft);stroke-width:2.5}
+.pitch .pass,.pitch .arr,.pitch .zl{transition:opacity .4s}
 .pitch .pass{fill:none;stroke:var(--red-soft);stroke-width:2.5;stroke-dasharray:6 5}
 .pitch .arr{fill:var(--red-soft)}
 .pitch .me{fill:var(--red)}
@@ -545,6 +548,67 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
 .score span{font-family:var(--mono);font-size:12px;border:1px dashed var(--line);border-radius:6px;padding:7px 10px;color:var(--fg-3)}
 .tight .rod-lead,.tight .score{display:none}
 @media (max-width:900px){.pinned .rod-lead{display:none}.pinned .quad{max-height:calc(var(--sh) * .3);margin-top:12px}}
+
+/* v3.1 · guia de sinais compacto, com sinal no fim */
+.guide{grid-template-areas:"head sigs" "light sigs";grid-template-rows:auto 1fr;row-gap:24px}
+.g-head{grid-area:head}.sigs{grid-area:sigs}.g-light{grid-area:light;align-self:start}
+.g-do{display:flex;gap:10px;align-items:center;margin:18px 0 0;font-weight:600;font-size:16px}
+.g-do span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--red-on-paper);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-size:13px}
+.axis h3 em{font-style:normal;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid var(--rule-paper);color:var(--on-paper-2);letter-spacing:.04em;text-transform:none}
+.axis h3 em.done{background:var(--grass);border-color:var(--grass-line);color:var(--mint)}
+.axis .sigset+.sigset{margin-top:8px}
+.lamp{display:flex;gap:14px;align-items:center;border-radius:16px;padding:16px 18px;background:var(--card);border:1px solid var(--rule-paper);transition:background .3s,border-color .3s,color .3s}
+.bulb{flex:none;width:30px;height:30px;border-radius:50%;background:var(--rule-paper);box-shadow:inset 0 0 0 4px rgba(0,0,0,.06);transition:background .3s,box-shadow .3s}
+.lamp.mid .bulb{background:var(--amber)}
+.lamp.ok{background:var(--grass);border-color:var(--grass-line);color:var(--fg)}
+.lamp.ok .bulb{background:#3FD17A;box-shadow:0 0 0 6px rgba(63,209,122,.22),0 0 22px rgba(63,209,122,.55)}
+.lamp .vs{font-family:var(--display);font-weight:800;font-stretch:85%;font-size:22px;line-height:1.1;margin:0}
+.lamp .vr{margin:4px 0 0;font-size:14px;color:var(--on-paper-2)}
+.lamp.ok .vr{color:var(--mint)}
+@media (max-width:900px){
+  .guide{grid-template-areas:"head" "sigs" "light";grid-template-rows:auto;row-gap:18px}
+  .g-lead{display:none}
+  .guide .h2{font-size:clamp(30px,8.5vw,40px)}
+  .sigset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .sig{font-size:12.5px;line-height:1.25;padding:7px 9px;border-radius:12px;text-align:left;align-items:flex-start}
+  .sig code{font-size:10px;padding-top:1px}
+  .g-light{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:3}
+  .lamp{box-shadow:0 10px 28px rgba(20,18,18,.18)}
+  .lamp .vs{font-size:19px}.lamp .vr{font-size:13px}
+  .nonote{display:none}
+  .sig-foot{grid-template-columns:minmax(0,1fr);gap:8px;margin-top:18px}
+  .sig-foot p{font-size:13.5px;padding-top:8px}
+}
+
+/* v3.1 · Rodada Colorada horizontal */
+.board{margin-top:8px}
+.pinned .rod{align-items:start}
+.teams{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:24px}
+.team{border:1px solid var(--red-soft);background:var(--ink-3);border-radius:14px;padding:12px 12px 14px;min-width:0}
+.team .tk{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+.team b{display:block;font-family:var(--display);font-weight:850;font-stretch:72%;font-size:clamp(22px,2.6vw,38px);line-height:1;margin-top:6px;white-space:nowrap}
+.team.sel{background:var(--red-deep);border-color:var(--red)}
+.team.base{background:var(--red);border-color:var(--red)}
+.team.base .tk{color:rgba(255,255,255,.8)}
+.rounds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.round{border-top:2px solid var(--line);padding-top:8px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.round .rl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red-soft)}
+.round .m{font-size:14.5px;color:var(--fg-2)}
+@media (max-width:900px){
+  .team{padding:10px 8px 11px;border-radius:12px}
+  .team .tk{font-size:9.5px;letter-spacing:.06em}
+  .team b{font-size:clamp(13px,3.9vw,22px)}
+  #rodada .wrap{display:flex;flex-direction:column}
+  #rodada .rod{display:contents}
+  #rodada .rod>div:first-child{order:1}
+  #rodada .board{order:2}
+  #rodada .rod>div:last-child{order:3;margin-top:14px}
+  .round .m{font-size:13px}
+  .round .rl{font-size:10px}
+  .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;border-top:0}
+  .fact{grid-template-columns:minmax(0,1fr);gap:2px;padding:9px 0;border-bottom:0;border-top:1px solid var(--line)}
+  .fact span{font-size:13.5px}
+}
 </style>
 </head>
 <body>
@@ -568,7 +632,7 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
       <a href="#rede">Rede</a>
       <a href="#competicao">Competição</a>
       <a href="#metodologia">Metodologia</a>
-      <a href="#norte">Norte</a>
+      <a href="#norte">Método</a>
       <a href="#funil">Funil</a>
       <a href="#sinais">Sinais</a>
       <a href="#rodada">Rodada</a>
@@ -807,13 +871,13 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
   </div>
 </div>
 
-<!-- 6b · O NORTE -->
+<!-- 6b · O MÉTODO -->
 <div class="pin" id="norte" data-ch data-pin="norte" style="--len:3.4">
   <div class="stage">
     <div class="wrap">
-      <p class="eyebrow">O norte</p>
+      <p class="eyebrow">O método</p>
       <h2 class="h2 nor-h2">O mesmo jogador, visto em três idades.</h2>
-      <p class="lead nor-lead">O clube sabe que atleta quer ter aos 16 anos. O SACI leva essa referência até o campinho, traduzida para o que dá para enxergar aos 12. É direção, não régua.<sup><a href="#n8">8</a></sup></p>
+      <p class="lead nor-lead">O clube sabe que atleta quer ter aos 16 anos: um jogo de imposição, que ganha território, disputa e transição. O SACI leva essa referência até o campinho, traduzida para o que dá para enxergar aos 12. É direção, não régua.<sup><a href="#n8">8</a></sup></p>
       <div class="ladder" role="group" aria-label="O mesmo perfil em três idades">
         <button type="button" class="rung" data-i="0" aria-pressed="true"><span class="ra">11–13</span><span class="rw">SACI · rede</span><span class="rm">O sinal aparece.</span></button>
         <button type="button" class="rung" data-i="1" aria-pressed="false"><span class="ra">14–15</span><span class="rw">Base</span><span class="rm">O sinal vira ação.</span></button>
@@ -821,25 +885,30 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
       </div>
       <div class="ndetail" aria-live="polite">
         <div>
-          <p class="nd-what" id="nWhat">Procura a bola, olha antes de receber e tenta jogar para frente.</p>
-          <svg class="pitch" viewBox="0 0 400 210" role="img" aria-label="Meio-campista recebe a bola no corredor central e joga para frente">
+          <p class="nd-what" id="nWhat">Perdeu a bola, vai buscar na hora. Recuperou, já olha para frente.</p>
+          <svg class="pitch" viewBox="0 0 400 210" role="img" aria-label="Transição: o atleta pressiona logo após a perda, recupera e acelera o jogo até o terço final">
             <rect class="pf" x="1" y="1" width="398" height="208" rx="6"/>
+            <rect class="zone" id="nZone" x="267" y="1" width="132" height="208"/>
             <line class="pl" x1="200" y1="1" x2="200" y2="209"/>
+            <line class="pl dash" x1="267" y1="1" x2="267" y2="209"/>
             <circle class="pl" cx="200" cy="105" r="30"/>
             <rect class="pl" x="1" y="55" width="50" height="100"/>
             <rect class="pl" x="349" y="55" width="50" height="100"/>
-            <g id="nPress"><circle class="opp" cx="186" cy="80" r="7"/><circle class="opp" cx="182" cy="132" r="7"/></g>
-            <circle class="scan" id="nScan" cx="160" cy="105" r="22"/>
-            <path class="pass" d="M160 105 L 285 72"/>
-            <polygon class="arr" points="285,72 273,70 278,80"/>
-            <circle class="me" cx="160" cy="105" r="9"/>
-            <circle class="mate" cx="292" cy="70" r="7"/>
-            <text class="lab" x="12" y="200">exemplo: meio-campista</text>
+            <circle class="opp" cx="196" cy="120" r="7"/><circle class="opp" id="nOpp2" cx="236" cy="70" r="7"/>
+            <path class="press" d="M150 130 L 186 122"/>
+            <polygon class="arr" points="186,122 176,117 177,127"/>
+            <path class="pass" id="nGo" d="M196 120 L 318 92"/>
+            <polygon class="arr" id="nGoA" points="318,92 306,90 310,100"/>
+            <circle class="me" cx="150" cy="130" r="9"/>
+            <circle class="mate" cx="326" cy="90" r="7"/>
+            <text class="lab" x="12" y="200">exemplo: transição</text>
+            <text class="lab zl" id="nClock" x="333" y="22" text-anchor="middle">terço final</text>
           </svg>
         </div>
         <dl class="nd-dl">
           <div><dt>Como se olha</dt><dd id="nHow">Guia de sinais: visto ou não visto, com a evidência do jogo. Sem nota.</dd></div>
           <div><dt>Quem decide</dt><dd id="nWho">O parceiro sinaliza, o SACI confirma e a formação decide na Rodada Colorada.</dd></div>
+          <div><dt>Lente do modelo</dt><dd>Transição, uma das três formas de imposição, ao lado de território e disputa.<sup><a href="#n8">8</a></sup></dd></div>
           <div><dt>O que não pesa</dt><dd id="nNot">Tamanho e velocidade. Aos 12 anos, dizem mais sobre quem cresceu antes do que sobre quem vai jogar.</dd></div>
         </dl>
       </div>
@@ -883,18 +952,14 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
 <section class="band paper" id="sinais" data-ch>
   <div class="wrap">
     <div class="guide">
-      <div>
+      <div class="g-head">
         <p class="eyebrow">Guia de sinais</p>
         <h2 class="h2">O que você viu? Não o que você acha.</h2>
-        <p class="lead">É o que o treinador do parceiro preenche ao indicar um atleta. Toque nos sinais que apareceram no jogo.</p>
-        <div class="verdict" id="verdict" aria-live="polite">
-          <p class="vs" id="vState">Nenhum sinal marcado</p>
-          <p class="vr" id="vRule">Para sinalizar: dois sinais de jogo e um de aprendizagem ou atitude, cada um com a evidência do jogo.</p>
-        </div>
-        <p class="nonote">Não existe nota. Não existe ranking. Altura e velocidade não são sinais.</p>
+        <p class="lead g-lead">É o que o treinador do parceiro preenche ao indicar um atleta.</p>
+        <p class="g-do"><span>1</span>Toque nos sinais que apareceram no jogo.</p>
       </div>
       <div class="sigs">
-        <div class="axis"><h3>Jogo</h3><div class="sigset" data-ax="J">
+        <div class="axis"><h3>Jogo <em id="cJ">0 de 2</em></h3><div class="sigset" data-ax="J">
           <button type="button" class="sig" aria-pressed="false"><code>J1</code>Protege a bola sob pressão</button>
           <button type="button" class="sig" aria-pressed="false"><code>J2</code>Olha antes de receber</button>
           <button type="button" class="sig" aria-pressed="false"><code>J3</code>Procura jogar para frente</button>
@@ -902,21 +967,27 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
           <button type="button" class="sig" aria-pressed="false"><code>J5</code>Se posiciona para receber</button>
           <button type="button" class="sig" aria-pressed="false"><code>J6</code>Reage à perda na hora</button>
         </div></div>
-        <div class="axis"><h3>Aprendizagem</h3><div class="sigset" data-ax="A">
+        <div class="axis"><h3>Aprendizagem ou atitude <em id="cAT">0 de 1</em></h3><div class="sigset" data-ax="A">
           <button type="button" class="sig" aria-pressed="false"><code>A1</code>Muda depois de uma orientação</button>
           <button type="button" class="sig" aria-pressed="false"><code>A2</code>Arrisca soluções novas</button>
-        </div></div>
-        <div class="axis"><h3>Atitude</h3><div class="sigset" data-ax="T">
+        </div><div class="sigset" data-ax="T">
           <button type="button" class="sig" aria-pressed="false"><code>T1</code>Pede a bola no momento difícil</button>
           <button type="button" class="sig" aria-pressed="false"><code>T2</code>Mantém o esforço no jogo difícil</button>
           <button type="button" class="sig" aria-pressed="false"><code>T3</code>Convive bem com o grupo</button>
         </div></div>
       </div>
+      <div class="g-light">
+        <div class="lamp" id="verdict" aria-live="polite">
+          <span class="bulb" aria-hidden="true"></span>
+          <div><p class="vs" id="vState">Aguardando os sinais</p><p class="vr" id="vRule">Faltam 2 sinais de jogo e 1 de aprendizagem ou atitude.</p></div>
+        </div>
+        <p class="nonote">Sem nota e sem ranking. Altura e velocidade não são sinais.</p>
+      </div>
     </div>
     <div class="sig-foot">
-      <p><b>Sem limite por parceiro.</b>O parceiro pode indicar quantos atletas quiser. O que se mede é a qualidade: quantas indicações viram convocação.</p>
-      <p><b>O SACI confere.</b>O observador confirma os sinais no evento seguinte. Divergência frequente pede capacitação, não punição.</p>
-      <p><b>Leitura nossa.</b>Os sinais são uma adaptação do SACI a partir do perfil de atleta do clube, a validar com a formação.<sup><a href="#n8">8</a></sup></p>
+      <p><b>Sem limite por parceiro.</b>O que se mede é a qualidade: quantas indicações viram convocação.</p>
+      <p><b>O SACI confere.</b>O observador confirma os sinais no evento seguinte.</p>
+      <p><b>Leitura nossa.</b>Adaptação do perfil de atleta do clube, a validar com a formação.<sup><a href="#n8">8</a></sup></p>
     </div>
   </div>
 </section>
@@ -929,28 +1000,29 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
         <div>
           <p class="eyebrow">Rodada Colorada</p>
           <h2 class="h2 rod-h2">O interior mede forças com a base do Inter.</h2>
-          <p class="lead rod-lead">Um dia, quatro times, todos contra todos. O garoto da Campanha joga contra quem já veste a camisa, e o da base lembra que a vaga não é garantida.</p>
-          <svg class="quad" viewBox="0 0 440 340" role="img" aria-label="Quadrangular: Polo Serra, Polo Campanha, Seleção SACI e Base Inter, todos contra todos">
-            <g data-step="5">
-              <line class="edge" x1="110" y1="80" x2="330" y2="80"/><line class="edge" x1="110" y1="260" x2="330" y2="260"/>
-              <line class="edge" x1="110" y1="80" x2="110" y2="260"/><line class="edge" x1="330" y1="80" x2="330" y2="260"/>
-              <line class="edge" x1="110" y1="80" x2="330" y2="260"/><line class="edge" x1="330" y1="80" x2="110" y2="260"/>
-              <text class="elab" x="220" y="70" text-anchor="middle">jogo curto</text><text class="elab" x="220" y="284" text-anchor="middle">rodízio de todos</text>
-            </g>
-            <g data-step="1"><circle class="tm" cx="110" cy="80" r="44"/><text class="tt" x="110" y="76" text-anchor="middle">Polo</text><text class="tt" x="110" y="94" text-anchor="middle">Serra</text></g>
-            <g data-step="2"><circle class="tm" cx="330" cy="80" r="44"/><text class="tt" x="330" y="76" text-anchor="middle">Polo</text><text class="tt" x="330" y="94" text-anchor="middle">Campanha</text></g>
-            <g data-step="3"><circle class="tm sel" cx="110" cy="260" r="44"/><text class="tt" x="110" y="256" text-anchor="middle">Seleção</text><text class="tt" x="110" y="274" text-anchor="middle">SACI</text></g>
-            <g data-step="4"><circle class="tm base" cx="330" cy="260" r="44"/><text class="tt" x="330" y="256" text-anchor="middle">Base</text><text class="tt" x="330" y="274" text-anchor="middle">Inter</text></g>
-          </svg>
+          <p class="lead rod-lead">Um dia, quatro times, três rodadas, todos contra todos. O garoto da Campanha joga contra quem já veste a camisa, e o da base lembra que a vaga não é garantida.</p>
         </div>
         <div>
           <div class="facts">
-            <div class="fact" data-step="6"><b>Quem joga</b><span>Duas seleções de polo, a Seleção SACI e a categoria da base do Inter na mesma idade.</span></div>
-            <div class="fact" data-step="7"><b>Onde</b><span>Anfitrião rotativo. Às vezes no CT do clube, às vezes a base sobe a serra ou vai à Campanha.</span></div>
-            <div class="fact" data-step="8"><b>Quando</b><span>Uma ou duas rodadas por janela, combinadas com a comissão da base.</span></div>
-            <div class="fact" data-step="9"><b>Para quê</b><span>A formação observa cada atleta em mais de um jogo. E o clube vê, em campo, o quanto a rede se aproxima da própria base.</span></div>
+            <div class="fact" data-step="8"><b>Quem joga</b><span>Duas seleções de polo, a Seleção SACI e a categoria da base do Inter na mesma idade.</span></div>
+            <div class="fact" data-step="9"><b>Onde</b><span>Anfitrião rotativo. Às vezes no CT do clube, às vezes a base sobe a serra ou vai à Campanha.</span></div>
+            <div class="fact" data-step="10"><b>Quando</b><span>Uma ou duas rodadas por janela, combinadas com a comissão da base.</span></div>
+            <div class="fact" data-step="11"><b>Para quê</b><span>A formação observa cada atleta em mais de um jogo. E o clube vê, em campo, o quanto a rede se aproxima da própria base.</span></div>
           </div>
-          <div class="score" data-step="9" aria-label="Regras de placar"><span>placar: existe</span><span>tabela pública: não</span><span>campeão: não</span><span>retorno: em particular</span></div>
+          <div class="score" data-step="11" aria-label="Regras de placar"><span>placar: existe</span><span>tabela pública: não</span><span>campeão: não</span><span>retorno: em particular</span></div>
+        </div>
+      </div>
+      <div class="board">
+        <div class="teams" aria-label="Os quatro times">
+          <div class="team" data-step="1"><span class="tk">Polo</span><b>Serra</b></div>
+          <div class="team" data-step="2"><span class="tk">Polo</span><b>Campanha</b></div>
+          <div class="team sel" data-step="3"><span class="tk">Seleção</span><b>SACI</b></div>
+          <div class="team base" data-step="4"><span class="tk">Base</span><b>Inter</b></div>
+        </div>
+        <div class="rounds" aria-label="Todos contra todos em três rodadas">
+          <div class="round" data-step="5"><span class="rl">1ª rodada</span><span class="m">Serra × Campanha</span><span class="m">SACI × Inter</span></div>
+          <div class="round" data-step="6"><span class="rl">2ª rodada</span><span class="m">Serra × SACI</span><span class="m">Campanha × Inter</span></div>
+          <div class="round" data-step="7"><span class="rl">3ª rodada</span><span class="m">Serra × Inter</span><span class="m">Campanha × SACI</span></div>
         </div>
       </div>
     </div>
@@ -1421,17 +1493,17 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
     dotsOn(pins.recursos,p<0.5?0:1);
   }
 
-  /* 7b · norte */
+  /* 7b · método (id norte) */
   var NOR=[
-    {what:'Procura a bola, olha antes de receber e tenta jogar para frente.',how:'Guia de sinais: visto ou não visto, com a evidência do jogo. Sem nota.',who:'O parceiro sinaliza, o SACI confirma e a formação decide na Rodada Colorada.',not:'Tamanho e velocidade. Aos 12 anos, dizem mais sobre quem cresceu antes do que sobre quem vai jogar.',scan:1,press:0},
-    {what:'Recebe sob pressão e já orienta o corpo para frente, no jogo de verdade.',how:'Vídeo e observação em contexto de jogo, sem métrica.',who:'Formação.',not:'Ranking entre atletas. A comparação só vale com posição, minutos e adversário ao lado.',scan:1,press:1},
-    {what:'Recebe sob pressão, orienta o corpo e conecta o jogo para frente, toda partida.',how:'Indicador por 90 minutos, vídeo e janela de quatro a seis jogos.',who:'Comissão técnica e desenvolvimento individual.',not:'Um jogo isolado. A leitura é sempre de uma sequência.',scan:0,press:1}];
+    {what:'Perdeu a bola, vai buscar na hora. Recuperou, já olha para frente.',how:'Guia de sinais (J6, J3): visto ou não visto, com a evidência do jogo. Sem nota.',who:'O parceiro sinaliza, o SACI confirma e a formação decide na Rodada Colorada.',not:'Ganhar a dividida no corpo. Aos 12 anos, tamanho e velocidade dizem mais sobre quem cresceu antes do que sobre quem vai jogar.',go:.35,zone:0},
+    {what:'Pressiona logo depois da perda e, ao recuperar, acelera o jogo para frente.',how:'Vídeo e observação em contexto de jogo, sem métrica.',who:'Formação.',not:'Ranking entre atletas. A comparação só vale com posição, minutos e adversário ao lado.',go:1,zone:.35},
+    {what:'Contrapressão que recupera a bola e chega ao terço final em poucos segundos, jogo após jogo.',how:'Recuperações após perda e posses que chegam ao terço final em poucos segundos, por 90 minutos, com vídeo e janela de quatro a seis jogos.',who:'Comissão técnica e desenvolvimento individual.',not:'Um jogo isolado. A leitura é sempre de uma sequência.',go:1,zone:1}];
   var rungs=$$('.rung'), norW=splitWords($('#nThesis')), lastNor=-1;
   function norSet(i){
     if(i===lastNor)return; lastNor=i;
     rungs.forEach(function(r,k){r.setAttribute('aria-pressed',k===i?'true':'false');});
     var d=NOR[i];$('#nWhat').textContent=d.what;$('#nHow').textContent=d.how;$('#nWho').textContent=d.who;$('#nNot').textContent=d.not;
-    $('#nPress').style.opacity=d.press?'1':'.25';$('#nScan').style.opacity=d.scan?'1':'.2';
+    $('#nGo').style.opacity=d.go;$('#nGoA').style.opacity=d.go;$('#nZone').style.opacity=d.zone;$('#nClock').style.opacity=d.zone?1:0;
   }
   norSet(0);
   function norte(p){
@@ -1445,7 +1517,7 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
     } else norSet(k);
   });});
   /* 7c · rodada */
-  function rodada(p){stepsOn(pins.rodada,Math.min(9,1+Math.floor(clamp(p/0.9)*9)));}
+  function rodada(p){stepsOn(pins.rodada,Math.min(11,1+Math.floor(clamp(p/0.9)*11)));}
 
   /* progresso, navegação e laço */
   var progBar=$('#prog');
@@ -1482,7 +1554,7 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
     competicao:[.02,.45,.92],
     metodologia:[1,2,3,4,5].map(function(k){return 0.34*k/6+0.012;}).concat([0,1,2,3,4,5,6,7].map(function(i){return 0.36+0.6*(i+0.5)/8;})),
     funil:[.0925,.2775,.4625,.6475,.985],fases:[.1,.5,.92],recursos:[.0675,.1275,.1875,.2475,.875],
-    norte:[.13,.39,.65,.985],rodada:[0,1,2,3,4,5,6,7,8].map(function(k){return 0.9*(k+0.5)/9;})};
+    norte:[.13,.39,.65,.985],rodada:[0,1,2,3,4,5,6,7,8,9,10].map(function(k){return 0.9*(k+0.5)/11;})};
   function invSmooth(g){var a=0,b=1;for(var i=0;i<30;i++){var m=(a+b)/2;if(smooth(m)<g)a=m;else b=m;}return (a+b)/2;}
   function redeStops(){
     var vis=track.parentNode.clientWidth,max=Math.max(0,track.scrollWidth-vis),n=Math.max(1,Math.ceil(max/(vis*0.75))),out=[0.04];
@@ -1569,12 +1641,13 @@ sup a{color:var(--red-soft);text-decoration:none;font-family:var(--mono);font-si
   function verdict(){
     var c={J:0,A:0,T:0};
     $$('.sigset').forEach(function(g){c[g.getAttribute('data-ax')]=$$('[aria-pressed="true"]',g).length;});
-    var tot=c.J+c.A+c.T, ok=c.J>=2&&(c.A+c.T)>=1, v=$('#verdict'), st=$('#vState'), ru=$('#vRule');
-    v.classList.toggle('ok',ok);
-    if(!tot){st.textContent='Nenhum sinal marcado';ru.textContent='Para sinalizar: dois sinais de jogo e um de aprendizagem ou atitude, cada um com a evidência do jogo.';}
-    else if(ok){st.textContent='Pode sinalizar';ru.textContent=tot+' sinais vistos. Agora a ficha pede a evidência de cada um: em que jogo e contra quem. O observador SACI confere no próximo evento.';}
-    else{var f=[];if(c.J<2)f.push((2-c.J)+(2-c.J===1?' sinal':' sinais')+' de jogo');if(c.A+c.T<1)f.push('um de aprendizagem ou atitude');
-      st.textContent='Ainda não';ru.textContent='Falta '+f.join(' e ')+'. Se não apareceu, o atleta segue nas competições e pode ser visto de novo.';}
+    var at=c.A+c.T, fj=Math.max(0,2-c.J), fa=Math.max(0,1-at), ok=!fj&&!fa, v=$('#verdict');
+    $('#cJ').textContent=Math.min(c.J,2)+' de 2';$('#cAT').textContent=Math.min(at,1)+' de 1';
+    $('#cJ').classList.toggle('done',!fj);$('#cAT').classList.toggle('done',!fa);
+    v.classList.toggle('ok',ok);v.classList.toggle('mid',!ok&&(c.J+at)>0);
+    if(ok){$('#vState').textContent='Sinal verde: pode indicar';$('#vRule').textContent='Na ficha, escreva em que jogo e contra quem viu cada sinal. O SACI confere no próximo evento.';}
+    else{var f=[];if(fj)f.push(fj+(fj===1?' sinal':' sinais')+' de jogo');if(fa)f.push('1 de aprendizagem ou atitude');
+      $('#vState').textContent=(c.J+at)?'Ainda não':'Aguardando os sinais';$('#vRule').textContent='Falta'+(fj+fa>1?'m ':' ')+f.join(' e ')+'. Se não apareceu, o atleta segue jogando e pode ser visto de novo.';}
   }
   sigs.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');verdict();});});
 
