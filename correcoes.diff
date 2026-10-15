@@ -1,0 +1,191 @@
+diff --git a/index.html b/index.html
+index 1a29631..6817f3e 100644
+--- a/index.html
++++ b/index.html
+@@ -8,7 +8,8 @@
+ <meta name="theme-color" content="#100E0E">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
++<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
++<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"></noscript>
+ <style>
+ /* Layout: mesma linguagem do Projeto SACI. Cada capítulo é uma cena presa na tela; a rolagem troca quadros, conta números e preenche palavras. Sem JS ou em tela muito baixa, tudo fica empilhado e legível. */
+ :root{
+@@ -28,7 +29,7 @@ html{scroll-behavior:smooth}
+ body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+ main{overflow-x:clip}
+ a{color:var(--red-soft)}
+-a:focus-visible,button:focus-visible{outline:2px solid var(--red-soft);outline-offset:3px;border-radius:6px}
++a:focus-visible,button:focus-visible,.plist li:focus-visible{outline:2px solid var(--red-soft);outline-offset:3px;border-radius:6px}
+ .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;box-sizing:border-box;width:100%}
+ @media (max-width:480px){.wrap{padding-inline:18px}}
+ [id]{scroll-margin-top:var(--navh)}
+@@ -66,7 +67,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+ .paper .cap{color:var(--on-paper-2)}
+ 
+ /* mecânica das cenas */
+-.band{padding-block:112px}
++.band{padding-block:56px 112px}
+ .paper{background:var(--paper);color:var(--on-paper)}
+ .stage{padding-block:96px}
+ .pinned{height:calc(var(--vh) * var(--len))}
+@@ -86,7 +87,6 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+ /* 0 · abertura */
+ .hero-stage{position:relative}
+ .hero-in{position:relative;text-align:center;z-index:1}
+-.hero-crest{width:clamp(52px,9vh,80px);height:auto;margin:0 auto clamp(14px,2.4vh,24px);filter:drop-shadow(0 6px 16px rgba(211,18,44,.22))}
+ .nav .crest{width:38px;height:38px}
+ .closing .close-crest{width:clamp(64px,13vh,140px);height:auto;margin:0 0 clamp(14px,3vh,30px);filter:drop-shadow(0 8px 24px rgba(0,0,0,.28))}
+ .hero-eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);margin:0 0 26px}
+@@ -186,12 +186,13 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+ .roleline span.on{color:var(--fg);border-color:var(--red)}
+ .verbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:36px}
+ @media (max-width:900px){.verbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
++@media (max-width:480px){.verbs{grid-template-columns:minmax(0,1fr)}}
+ .vb{background:var(--ink-2);border-radius:18px;padding:22px;min-width:0}
+ .vb .verb{font-family:var(--display);font-weight:850;font-stretch:74%;font-size:clamp(30px,3.4vw,46px);line-height:1;margin:0 0 10px;text-transform:uppercase}
+ .vb p{margin:0;font-size:15px;color:var(--fg-2)}
+-.pinned .fun-stage{position:relative;height:calc(var(--sh) * .55)}
+-.pinned .verbs{display:block;position:relative;height:100%;margin-top:0}
+-.pinned .vb{position:absolute;inset:0;background:none;padding:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
++.pinned .fun-stage{position:relative;display:grid;min-height:calc(var(--sh) * .55)}
++.pinned .verbs{display:grid;grid-area:1/1;margin-top:0}
++.pinned .vb{grid-area:1/1;background:none;padding:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
+ .pinned .vb:first-child{opacity:1}
+ .pinned .vb .verb{font-size:clamp(44px,min(10vw,20vh),200px);line-height:.84;letter-spacing:-.02em;margin:8px 0 18px}
+ .pinned .vb p{font-size:clamp(17px,1.8vw,23px);max-width:40ch}
+@@ -199,7 +200,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+ .coda{font-family:var(--display);font-weight:850;font-stretch:78%;font-size:clamp(34px,min(5vw,8vh),72px);line-height:1;margin:0;max-width:18ch}
+ .region{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+ .region span{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--fg-2)}
+-.pinned .coda-box{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;margin-top:0}
++.pinned .coda-box{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;opacity:0;margin-top:0}
+ 
+ /* transição */
+ .steps{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@@ -403,11 +404,23 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+   .stepnav #stepPlay span{display:none}
+   .kb-touch{display:inline}.kb-desk{display:none}
+   .pinned>.stage{padding-bottom:72px}
++  .pinned .frames{height:calc(var(--sh) - 88px)}
+   .pinned .dots{display:none}
++  .stepnav #stepPlay{min-width:44px}
++  .nav-links a{padding:12px 0}
++  .plist li{min-height:44px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+ }
+ .kb-touch{display:none}
+ .cine .kb-hint{display:block}
+ @media (max-width:600px){.nav .readout{display:none}}
++/* botões flutuantes do desktop não cobrem o fim das linhas */
++@media (hover:hover) and (pointer:fine) and (min-width:700px){.cine .pinned:not(#topo) .wrap,.cine .band .wrap{padding-right:max(24px,calc(161px - max(0px,(100vw - 1180px) / 2)))}}
++/* notch do iPhone na horizontal */
++.wrap,.nav-in{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
++@media (max-width:600px){.nav-in{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
++@media (max-width:480px){.wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
++/* movimento reduzido: elementos da abertura já no estado final */
++@media (prefers-reduced-motion:reduce){.hero-in h1 .w,.motto,.hero-meta,.hero-ro,.scroll-cue,.scroll-cue::after,.kb-hint,.hero-pitch path,.hero-pitch circle,.hero-pitch line{animation:none}}
+ 
+ /* notas */
+ .notes{border-top:1px solid var(--line);background:var(--ink);padding-block:56px 88px}
+@@ -531,7 +544,6 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+     <div class="disc" id="disc" data-anim aria-hidden="true"></div>
+     <div class="wrap hero-in">
+       <div id="heroA" data-anim>
+-        <svg class="crest hero-crest" viewBox="0 0 1000 1000" role="img" aria-label="Escudo do Internacional"><use href="#inter-crest"/></svg>
+         <p class="hero-eyebrow">Sport Club Internacional · Departamento de Futebol</p>
+         <h1 id="heroH1">Gestão do Futebol 2027–2029</h1>
+         <p class="motto"><span><b>Identidade</b> para jogar.</span><span><b>Método</b> para formar.</span><span><b>Inteligência</b> para contratar.</span><span><b>Estrutura</b> para competir.</span></p>
+@@ -791,7 +803,6 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+             <div class="dc"><span class="dk">Performance</span><span class="dm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="dn" data-to="13">13</span><span class="dp">50% do elenco</span><span class="dbm">Média do estudo: <b>49,3%</b></span><span class="dd">Os demais atletas do elenco, voltados ao rendimento imediato.</span></div>
+           </div>
+         </div>
+-        </div>
+         <div class="frame" data-anim>
+           <p class="eyebrow">Status e folha</p>
+           <h2 class="h2" style="max-width:none;font-size:clamp(30px,min(4.4vw,7vh),64px)">Cada jogador tem um papel. A folha acompanha.</h2>
+@@ -1000,7 +1011,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+     el.style.transformOrigin='50% 50%';el.style.transform='scale('+sc.toFixed(4)+')';
+     return sc;
+   }
+-  var FRAMED={hero:1,prop:1,bola:1,elenco:1,close:1};
++  var FRAMED={prop:1,bola:1,elenco:1,close:1};
+   /* cada quadro cabe inteiro na área visível: o conteúdo vai numa caixa que encolhe só o necessário */
+   $$('.frame').forEach(function(f){
+     var box=document.createElement('div');box.className='fbox';
+@@ -1017,7 +1028,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+   }
+   function layout(a){
+     if(a===undefined)a=saveAnchor();
+-    cine=!/[?&]estatico\b/.test(location.search) && VH>=360 && VH<=2600;
++    cine=!/[?&]estatico\b/.test(location.search) && VH>=460 && VH<=2600;
+     root.classList.toggle('cine',cine);
+     Object.keys(pins).forEach(function(k){
+       var pin=pins[k];
+@@ -1028,7 +1039,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+       if(k==='hero')inner=st.querySelector('.hero-in');
+       unfit(inner);
+       if(FRAMED[k])return;
+-      var avail=st.clientHeight-30;
++      var scs=getComputedStyle(st), avail=st.clientHeight-parseFloat(scs.paddingTop)-parseFloat(scs.paddingBottom);
+       if(inner.scrollHeight<=avail)return;
+       pin.classList.add('tight');
+       if(inner.scrollHeight<=avail)return;
+@@ -1068,7 +1079,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+   var propFrames=$$('#propFrames .frame');
+   function prop(p){
+     var loc=xfade(propFrames,p,60);
+-    fillWords(propW,clamp(loc[0]/0.6)); fillWords(teseW,clamp(loc[1]/0.45));
++    fillWords(propW,clamp(loc[0]/0.5)); fillWords(teseW,clamp(loc[1]/0.45));
+     dotsOn(pins.prop,Math.min(2,Math.floor(p*3)));
+   }
+   var pilLayers=$$('#pilLayers .layer'), pilBars=$$('.lbar i',pins.pilares);
+@@ -1143,9 +1154,9 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+     var loc=xfade(elFrames,p,60);
+     /* ao chegar no quadro, ele se preenche inteiro de uma vez (cascata rápida), sem depender do quanto rolou */
+     for(var k=1;k<elFrames.length;k++){
+-      var on=loc[k]>0.2&&loc[k]<1.05;
+-      if(on&&!fState[k]){fState[k]=1;fillFrame(k);}
+-      else if(loc[k]<0.08&&fState[k]){fState[k]=0;fDots[k].forEach(function(d){d.style.transitionDelay='0s';d.classList.remove('on');});$$('.dn[data-to]',elFrames[k]).forEach(function(n){n.textContent=numText(n,0);});}
++      var op=parseFloat(elFrames[k].style.opacity)||0;
++      if(op>0.3&&!fState[k]){fState[k]=1;fillFrame(k);}
++      else if(op<0.05&&loc[k]===0&&fState[k]){fState[k]=0;fDots[k].forEach(function(d){d.style.transitionDelay='0s';d.classList.remove('on');});$$('.dn[data-to]',elFrames[k]).forEach(function(n){n.textContent=numText(n,0);});}
+     }
+     dotsOn(pins.elenco,Math.min(elFrames.length-1,Math.floor(p*elFrames.length)));
+   }
+@@ -1276,6 +1287,17 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+   });
+   $('#stepPrev').addEventListener('click',function(){stopAuto();go(-1);});
+   $('#stepNext').addEventListener('click',function(){stopAuto();go(1);});
++  /* links do menu levam à primeira parada do capítulo (quadro completo), não ao início da cena */
++  navLinks.concat([$('.brand')]).forEach(function(a){
++    a.addEventListener('click',function(e){
++      var t=document.querySelector(a.getAttribute('href'));
++      if(!cine||!t)return;
++      e.preventDefault();stopAuto();
++      var k=t.getAttribute('data-pin'),top=t.getBoundingClientRect().top+window.scrollY-NAV,y=top;
++      if(k&&t.classList.contains('pinned')&&STOPS[k])y=top+(t.offsetHeight-(VH-NAV))*STOPS[k][0];
++      navT=Math.round(Math.max(0,Math.min(document.documentElement.scrollHeight-VH,y)));navAt=Date.now();smoothTo(navT);
++    });
++  });
+ 
+   /* modo apresentação: avança sozinho; qualquer gesto devolve o controle */
+   var autoT=null,playBtn=$('#stepPlay'),playLab=$('#stepPlayLab');
+@@ -1283,7 +1305,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+   function startAuto(){playBtn.setAttribute('aria-pressed','true');playLab.textContent='Pausar';navT=null;autoT=setTimeout(autoStep,600);}
+   function stopAuto(){if(autoT===null&&playBtn.getAttribute('aria-pressed')==='false')return;clearTimeout(autoT);autoT=null;playBtn.setAttribute('aria-pressed','false');playLab.textContent='Apresentar';}
+   playBtn.addEventListener('click',function(){if(playBtn.getAttribute('aria-pressed')==='true')stopAuto();else startAuto();});
+-  ['wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,function(){stopAuto();},{passive:true});});
++  ['wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,function(e){if(ev==='wheel'||!(e.target.closest&&e.target.closest('.stepnav')))stopAuto();},{passive:true});});
+   document.addEventListener('mousedown',function(e){if(!e.target.closest('.stepnav'))stopAuto();});
+   document.addEventListener('visibilitychange',function(){if(document.hidden)stopAuto();});
+ 
+@@ -1311,6 +1333,8 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
+   setVars();
+   layout(null);
+   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){relayout();});
++  /* a folha de fontes carrega sem bloquear: reajusta quando as fontes chegam */
++  if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener('loadingdone',function(){relayout();});
+ })();
+ </script>
+ </body>
