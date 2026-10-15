@@ -330,3 +330,20 @@ Corrige layout, rolagem e toque da apresentação Gestão do Futebol
 
 Mantém index.original.html, relatorio-validacao.md e os prints em validacao/.
 ```
+
+---
+
+# Fase 3 — Ajustes após o teste do usuário (Chrome no Windows, janela ~1280×640)
+
+| # | Relato do usuário | Causa | Correção | Evidência depois |
+|---|---|---|---|---|
+| U1 | Escudo da abertura cortado no topo; pediu para retirar | Na janela baixa, o escudo era o primeiro item a ficar sob o menu quando a abertura escala | **Escudo da abertura retirado** a pedido do usuário (continua no menu e no fechamento). Regra `.hero-crest` removida junto | [Verificado — print] `depois/desk1280x640_chromium_paisagem_menu-topo.png` |
+| U2 | Ao clicar em “Propósito”, a última frase ficava apagada | Os links do menu levavam ao **início** da cena, antes do preenchimento das palavras (as paradas do botão já estavam certas) | Links do menu e escudo do menu levam à **primeira parada** do capítulo (modo cena); no modo empilhado, comportamento nativo | [Verificado — log + print] 0 palavras pela metade em Propósito, Inteligência, Identidade e Compromissos via menu; `depois/desk1280x640_chromium_paisagem_menu-proposito.png` |
+| U3 | Textos sobrepostos no SACI | O texto final (“O talento no seu habitat…”) é mais alto que a área reservada (55% da tela). Centralizado, transbordava **para cima**, sobre Conhecer/Priorizar/Conectar, e o ajuste de escala não percebia | Verbos e texto final empilhados na mesma célula de grid; a área cresce até o maior deles e o ajuste de escala passa a enxergar a altura real. Visual idêntico quando o texto cabe | [Verificado — log + print] 0 sobreposições na rolagem contínua (1280×640, 1280×550, 1366×768, 1920×1080, 375×667, 320×658, 390×664, 768×1024, 1024×768); `depois/desk1280x640_chromium_paisagem_saci-coda.png` |
+| U4 | Elenco: quadro visível com todos os números em 0 | A cascata só começava quando o quadro tinha 20% de avanço; entre ~7% e 20% ele já estava visível e zerado | A cascata dispara assim que o quadro passa de 30% de opacidade, e só zera de novo quando ele sai totalmente (para trás) | [Verificado — log + print] 0 ocorrências de “0” visível na rolagem contínua; `depois/desk1280x640_chromium_paisagem_elenco-perfil-etario.png` |
+| U5 | Vão grande entre o menu e “Compromissos do modelo”, espremendo os cards | `.band{padding-block:112px}`: a parada cai no topo do bloco, com 112 px vazios | Espaço superior do bloco reduzido para 56 px (inferior mantido) | [Verificado — print] `depois/desk1280x640_chromium_paisagem_menu-compromissos.png` |
+| U6 | (achado no reteste) botões flutuantes encostando nos cards 03/06 de Compromissos em 1280 px | A reserva de margem da B4 valia só para as cenas fixas | Reserva estendida ao bloco de Compromissos | [Verificado — print] |
+
+**Reteste de regressão** (iPhone SE, Galaxy S9+, iPad Mini, 1280×720, 1366×768, 1366×620): mesmas 60–63 paradas, ida e volta iguais, 0 cortes, 0 palavras pela metade, 0 erros. [Verificado — log]
+
+**Nova verificação adicionada à bateria:** detector de sobreposição entre textos visíveis e de números zerados visíveis, rodando em rolagem contínua (passo de 1/8 de tela). Foi a lacuna que deixou U3 e U4 passarem na Fase 2: a bateria anterior só checava cortes contra a borda da tela e o estado nas paradas.
