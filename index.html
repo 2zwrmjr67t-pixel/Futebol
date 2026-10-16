@@ -8,8 +8,7 @@
 <meta name="theme-color" content="#100E0E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 /* Layout: mesma linguagem do Projeto SACI. Cada capítulo é uma cena presa na tela; a rolagem troca quadros, conta números e preenche palavras. Sem JS ou em tela muito baixa, tudo fica empilhado e legível. */
 :root{
@@ -29,7 +28,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 main{overflow-x:clip}
 a{color:var(--red-soft)}
-a:focus-visible,button:focus-visible,.plist li:focus-visible{outline:2px solid var(--red-soft);outline-offset:3px;border-radius:6px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red-soft);outline-offset:3px;border-radius:6px}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;box-sizing:border-box;width:100%}
 @media (max-width:480px){.wrap{padding-inline:18px}}
 [id]{scroll-margin-top:var(--navh)}
@@ -67,7 +66,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
 .paper .cap{color:var(--on-paper-2)}
 
 /* mecânica das cenas */
-.band{padding-block:56px 112px}
+.band{padding-block:112px}
 .paper{background:var(--paper);color:var(--on-paper)}
 .stage{padding-block:96px}
 .pinned{height:calc(var(--vh) * var(--len))}
@@ -87,6 +86,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
 /* 0 · abertura */
 .hero-stage{position:relative}
 .hero-in{position:relative;text-align:center;z-index:1}
+.hero-crest{width:clamp(52px,9vh,80px);height:auto;margin:0 auto clamp(14px,2.4vh,24px);filter:drop-shadow(0 6px 16px rgba(211,18,44,.22))}
 .nav .crest{width:38px;height:38px}
 .closing .close-crest{width:clamp(64px,13vh,140px);height:auto;margin:0 0 clamp(14px,3vh,30px);filter:drop-shadow(0 8px 24px rgba(0,0,0,.28))}
 .hero-eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);margin:0 0 26px}
@@ -186,13 +186,12 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
 .roleline span.on{color:var(--fg);border-color:var(--red)}
 .verbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:36px}
 @media (max-width:900px){.verbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:480px){.verbs{grid-template-columns:minmax(0,1fr)}}
 .vb{background:var(--ink-2);border-radius:18px;padding:22px;min-width:0}
 .vb .verb{font-family:var(--display);font-weight:850;font-stretch:74%;font-size:clamp(30px,3.4vw,46px);line-height:1;margin:0 0 10px;text-transform:uppercase}
 .vb p{margin:0;font-size:15px;color:var(--fg-2)}
-.pinned .fun-stage{position:relative;display:grid;min-height:calc(var(--sh) * .55)}
-.pinned .verbs{display:grid;grid-area:1/1;margin-top:0}
-.pinned .vb{grid-area:1/1;background:none;padding:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
+.pinned .fun-stage{position:relative;height:calc(var(--sh) * .55)}
+.pinned .verbs{display:block;position:relative;height:100%;margin-top:0}
+.pinned .vb{position:absolute;inset:0;background:none;padding:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
 .pinned .vb:first-child{opacity:1}
 .pinned .vb .verb{font-size:clamp(44px,min(10vw,20vh),200px);line-height:.84;letter-spacing:-.02em;margin:8px 0 18px}
 .pinned .vb p{font-size:clamp(17px,1.8vw,23px);max-width:40ch}
@@ -200,7 +199,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
 .coda{font-family:var(--display);font-weight:850;font-stretch:78%;font-size:clamp(34px,min(5vw,8vh),72px);line-height:1;margin:0;max-width:18ch}
 .region{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .region span{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--fg-2)}
-.pinned .coda-box{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;opacity:0;margin-top:0}
+.pinned .coda-box{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;margin-top:0}
 
 /* transição */
 .steps{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -404,28 +403,73 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   .stepnav #stepPlay span{display:none}
   .kb-touch{display:inline}.kb-desk{display:none}
   .pinned>.stage{padding-bottom:72px}
-  .pinned .frames{height:calc(var(--sh) - 88px)}
   .pinned .dots{display:none}
-  .stepnav #stepPlay{min-width:44px}
-  .nav-links a{padding:12px 0}
-  .plist li{min-height:44px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
 }
 .kb-touch{display:none}
 .cine .kb-hint{display:block}
 @media (max-width:600px){.nav .readout{display:none}}
-/* botões flutuantes do desktop não cobrem o fim das linhas */
-@media (hover:hover) and (pointer:fine) and (min-width:700px){.cine .pinned:not(#topo) .wrap,.cine .band .wrap{padding-right:max(24px,calc(161px - max(0px,(100vw - 1180px) / 2)))}}
-/* notch do iPhone na horizontal */
-.wrap,.nav-in{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-@media (max-width:600px){.nav-in{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
-@media (max-width:480px){.wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
-/* movimento reduzido: elementos da abertura já no estado final */
-@media (prefers-reduced-motion:reduce){.hero-in h1 .w,.motto,.hero-meta,.hero-ro,.scroll-cue,.scroll-cue::after,.kb-hint,.hero-pitch path,.hero-pitch circle,.hero-pitch line{animation:none}}
 
 /* notas */
 .notes{border-top:1px solid var(--line);background:var(--ink);padding-block:56px 88px}
 .notes h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 14px}
 .notes ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--fg-3);max-width:90ch}
+
+/* perfil de jogador: scanner */
+.pfx-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:center;width:100%}
+.pfx-fig{width:100%;height:auto;max-height:calc(var(--sh) - 40px);display:block;overflow:visible}
+.pfx-ruler line{stroke:var(--fg-3);stroke-width:1.5;opacity:.5}
+.pfx-ghost use{fill:rgba(244,241,237,.05);stroke:var(--red);stroke-width:5;stroke-opacity:.75}
+.pfx-solid use{fill:var(--fg)}
+.pfx-scan line{stroke:var(--red);stroke-width:3}
+.pfx-scan text{font-family:var(--mono);font-size:15px;fill:var(--red-soft);letter-spacing:.1em}
+.pfx-hs .pfx-core{fill:var(--fg-3);transition:fill .4s}
+.pfx-hs .pfx-pulse{fill:none;stroke:var(--red);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.pfx-hs text{font-family:var(--mono);font-size:17px;fill:var(--fg-3);opacity:0;transition:opacity .4s}
+.pfx-hs.on .pfx-core{fill:var(--red)}
+.pfx-hs.on text{opacity:1;fill:var(--red-soft)}
+.pfx-hs.cur .pfx-pulse{animation:pfxPulse 1.6s ease-out infinite}
+@keyframes pfxPulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
+.pfx-at{opacity:0;transform:translateY(10px);transition:opacity .5s ease calc(var(--i) * .09s),transform .5s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .09s);color:var(--fg)}
+.pfx-at line{stroke:var(--red);stroke-width:1.5;stroke-dasharray:4 5;opacity:.8}
+.pfx-at .pfx-atr{fill:var(--ink-2);stroke:var(--red);stroke-width:2}
+.pfx-at text{font-family:var(--display);font-weight:850;font-stretch:80%;text-transform:uppercase;letter-spacing:.04em;font-size:22px;fill:var(--fg)}
+.pfx.done .pfx-at{opacity:1;transform:none}
+.pfx-text{position:relative;min-width:0}
+.pfx-fr .eyebrow{margin-bottom:14px}
+.pfx-h{font-size:clamp(34px,min(5vw,8.5vh),84px);max-width:12ch}
+.pfx-lead{font-size:clamp(16px,1.6vw,20px);color:var(--fg-2);max-width:36ch;margin:18px 0 0}
+.pfx-k{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);margin:0 0 12px}
+.pfx-k span{color:var(--red-soft)}
+.pfx-big{overflow-wrap:normal;word-break:normal;hyphens:none;font-family:var(--display);font-weight:850;font-stretch:72%;text-transform:uppercase;font-size:clamp(40px,min(5.8vw,13vh),118px);line-height:.86;letter-spacing:-.01em;margin:0 0 18px;color:var(--fg)}
+.pfx-q{font-size:clamp(17px,1.9vw,25px);line-height:1.35;color:var(--fg-2);max-width:30ch;margin:0;border-left:3px solid var(--red);padding-left:16px}
+.pfx-q2{max-width:38ch;font-size:clamp(16px,1.6vw,21px)}
+.pfx-q b{color:var(--fg)}
+.pfx-list{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.pfx-list li{font-family:var(--display);font-weight:800;font-stretch:80%;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(14px,1.3vw,17px);padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg)}
+.pfx-seal{display:inline-block;margin:22px 0 0;font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--red);padding:8px 14px;border-radius:4px}
+.pinned .pfx-text{height:calc(var(--sh) * .66)}
+.pinned .pfx-fr{position:absolute;left:0;right:0;top:50%;transform:translateY(-44%);opacity:0;transition:opacity .45s ease,transform .6s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.pinned .pfx-fr.on{opacity:1;transform:translateY(-50%);pointer-events:auto}
+.pin:not(.pinned) .pfx-fr{margin:0 0 26px}
+.pin:not(.pinned) .pfx-at{opacity:1;transform:none}
+.pin:not(.pinned) .pfx-hs .pfx-core{fill:var(--red)}
+.pin:not(.pinned) .pfx-hs text{opacity:1}
+.pin:not(.pinned) .pfx-scan{display:none}
+.pin:not(.pinned) #pfxClipR{height:640px}
+@media (max-width:820px){
+  .pfx-grid{grid-template-columns:minmax(0,1fr);gap:6px;align-content:center}
+  .pinned .pfx-figbox{height:calc(var(--sh) * .48)}
+  .pfx-fig{height:100%;width:100%;max-height:none}
+  .pinned .pfx-text{height:calc(var(--sh) * .42)}
+  .pfx-at text{font-size:26px}
+  .pfx-big{font-size:clamp(34px,10.5vw,58px);margin-bottom:12px}
+  .pfx-h{font-size:clamp(30px,9vw,44px)}
+  .pfx-q{font-size:16px}.pfx-q2{font-size:14px}
+  .pfx-list{margin-top:12px;gap:6px}.pfx-list li{font-size:13px;padding:4px 10px}
+  .pfx-seal{margin-top:12px;font-size:11px}
+  .pfx-lead{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){.pfx-hs.cur .pfx-pulse{animation:none}}
 </style>
 </head>
 <body>
@@ -544,6 +588,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
     <div class="disc" id="disc" data-anim aria-hidden="true"></div>
     <div class="wrap hero-in">
       <div id="heroA" data-anim>
+        <svg class="crest hero-crest" viewBox="0 0 1000 1000" role="img" aria-label="Escudo do Internacional"><use href="#inter-crest"/></svg>
         <p class="hero-eyebrow">Sport Club Internacional · Departamento de Futebol</p>
         <h1 id="heroH1">Gestão do Futebol 2027–2029</h1>
         <p class="motto"><span><b>Identidade</b> para jogar.</span><span><b>Método</b> para formar.</span><span><b>Inteligência</b> para contratar.</span><span><b>Estrutura</b> para competir.</span></p>
@@ -672,7 +717,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
         </svg>
         <ol class="plist" id="plist">
           <li class="cur" data-step="1" data-p="1" tabindex="0" role="button"><span class="ph">Com a bola</span><h3>Construção vertical</h3><p>Progredir rápido e quebrar as linhas do adversário.</p></li>
-          <li data-step="2" data-p="2" tabindex="0" role="button"><span class="ph">Com a bola</span><h3>Saída curta</h3><p>Construir o jogo desde o tiro de meta.</p></li>
+          <li data-step="2" data-p="2" tabindex="0" role="button"><span class="ph">Com a bola</span><h3>Saída curta sem risco</h3><p>Construir o jogo desde o tiro de meta.</p></li>
           <li data-step="3" data-p="3" tabindex="0" role="button"><span class="ph">Transição</span><h3>Pós-perda agressivo</h3><p>Perdeu a bola, vai buscar na hora.</p></li>
           <li data-step="4" data-p="4" tabindex="0" role="button"><span class="ph">Transição</span><h3>Contra-ataque</h3><p>Recuperou, acelera rumo ao gol.</p></li>
           <li data-step="5" data-p="5" tabindex="0" role="button"><span class="ph">Sem a bola</span><h3>Pressão constante</h3><p>Agressividade permanente sobre quem tem a bola.</p></li>
@@ -712,7 +757,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
 
 <!-- faixa de palavras-chave -->
 <div class="marquee" id="marquee" aria-label="Palavras-chave do projeto">
-  <div class="mq-row" id="mq1"><span class="hl">Método Inter</span><span>Construção vertical</span><span>Pós-perda</span><span>Pressão</span><span>Saída curta</span><span>Contra-ataque</span><span>Marcação alta</span><span class="hl">Bola parada</span><span class="hl">Método Inter</span><span>Construção vertical</span><span>Pós-perda</span><span>Pressão</span><span>Saída curta</span><span>Contra-ataque</span><span>Marcação alta</span><span class="hl">Bola parada</span></div>
+  <div class="mq-row" id="mq1"><span class="hl">Método Inter</span><span>Construção vertical</span><span>Pós-perda</span><span>Pressão</span><span>Saída curta sem risco</span><span>Contra-ataque</span><span>Marcação alta</span><span class="hl">Bola parada</span><span class="hl">Método Inter</span><span>Construção vertical</span><span>Pós-perda</span><span>Pressão</span><span>Saída curta sem risco</span><span>Contra-ataque</span><span>Marcação alta</span><span class="hl">Bola parada</span></div>
   <div class="mq-row" id="mq2"><span class="hl">Celeiro de Ases</span><span>SACI</span><span>Linha sucessória</span><span>Ativos</span><span class="hl">26 de linha</span><span>Desenvolvimento individual</span><span>Manual do Futebol</span><span>Alçadas</span><span class="hl">Celeiro de Ases</span><span>SACI</span><span>Linha sucessória</span><span>Ativos</span><span class="hl">26 de linha</span><span>Desenvolvimento individual</span><span>Manual do Futebol</span><span>Alçadas</span></div>
 </div>
 
@@ -803,6 +848,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
             <div class="dc"><span class="dk">Performance</span><span class="dm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="dn" data-to="13">13</span><span class="dp">50% do elenco</span><span class="dbm">Média do estudo: <b>49,3%</b></span><span class="dd">Os demais atletas do elenco, voltados ao rendimento imediato.</span></div>
           </div>
         </div>
+        </div>
         <div class="frame" data-anim>
           <p class="eyebrow">Status e folha</p>
           <h2 class="h2" style="max-width:none;font-size:clamp(30px,min(4.4vw,7vh),64px)">Cada jogador tem um papel. A folha acompanha.</h2>
@@ -817,6 +863,28 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
         </div>
       </div>
       <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</div>
+
+<!-- 8b · INTELIGÊNCIA: PERFIL DE JOGADOR (scanner) -->
+<div class="pin pfx" id="perfil" data-pin="perfil" style="--len:5.2">
+  <div class="stage grid">
+    <div class="wrap pfx-grid">
+      <div class="pfx-figbox"><svg class="pfx-fig" viewBox="0 0 600 640" role="img" aria-label="Leitura de perfil: silhueta de jogador analisada da cabeça aos pés">
+  <defs>
+    <path id="pfxBody" fill-rule="evenodd" d="M390.5,1957.4C326.0,1952.5 314.8,1950.2 295.9,1938.2C286.8,1932.4 273.7,1910.5 268.5,1892.5C265.7,1882.9 263.0,1862.9 263.0,1851.5C263.0,1831.5 270.7,1808.6 284.4,1788.0C299.5,1765.4 327.1,1745.2 353.4,1737.6C376.1,1731.0 408.9,1731.6 431.2,1739.0C457.4,1747.8 481.1,1766.3 497.4,1790.7C505.6,1803.1 510.3,1814.0 513.8,1828.5C516.1,1838.0 516.4,1841.6 516.4,1855.5C516.4,1870.2 516.1,1872.6 513.2,1884.0C507.2,1907.8 501.1,1920.0 487.7,1935.3C476.5,1948.0 467.6,1953.7 455.0,1956.3C444.2,1958.6 412.5,1959.1 390.5,1957.4ZM722.0,1873.1C713.7,1870.5 702.5,1864.2 696.8,1859.1C688.9,1852.0 680.3,1839.8 677.9,1832.1C676.2,1826.5 675.9,1824.0 676.5,1815.5L677.1,1805.5L674.1,1801.5C672.4,1799.3 671.0,1796.7 671.0,1795.7C671.0,1794.7 672.5,1790.3 674.4,1786.1C684.8,1762.5 685.1,1753.5 676.9,1710.3C675.0,1700.0 674.0,1691.5 674.0,1685.1C673.9,1672.5 672.7,1669.9 660.5,1656.9C642.7,1637.9 642.0,1631.2 654.6,1605.8C656.9,1601.3 658.0,1597.6 658.0,1594.8C658.0,1588.4 653.2,1570.1 639.0,1522.5C630.4,1493.5 626.4,1478.5 623.5,1464.8C622.1,1458.3 619.4,1447.6 617.5,1440.9C613.2,1426.4 608.7,1407.0 606.5,1394.0C604.3,1381.3 603.5,1351.8 605.0,1341.5C605.6,1337.1 606.5,1325.6 607.0,1316.0C607.4,1306.4 608.3,1295.2 609.0,1291.1C610.8,1279.8 609.9,1264.8 606.9,1257.5C603.7,1249.5 600.0,1247.0 591.5,1247.0C583.4,1247.0 580.6,1244.9 578.4,1237.3C576.4,1230.6 560.7,1198.9 554.8,1190.0C550.3,1183.1 543.7,1176.2 532.7,1166.6C528.9,1163.4 523.5,1157.3 520.5,1153.1C515.8,1146.4 509.4,1138.8 497.4,1125.7C495.4,1123.5 494.0,1120.9 494.0,1119.4C494.0,1115.3 490.7,1110.0 479.5,1096.4C473.7,1089.3 466.1,1079.5 462.7,1074.6C459.3,1069.7 453.8,1061.8 450.4,1057.1C439.5,1041.7 437.0,1034.8 437.0,1019.8C437.0,1012.2 436.3,1006.9 434.0,997.2C431.2,985.5 430.6,984.1 425.6,977.5C419.4,969.4 419.4,969.4 417.0,957.3C416.0,952.2 413.6,944.6 411.6,940.3C407.1,930.4 405.0,922.1 405.0,914.9C405.0,911.7 406.8,900.2 408.9,889.3C411.1,878.4 413.4,863.6 414.0,856.5C415.7,835.8 418.3,823.5 425.0,804.5C429.2,792.5 431.3,780.7 430.5,774.1C428.9,760.5 420.6,723.7 414.5,703.5C410.6,690.2 406.7,671.8 404.5,655.2C402.0,636.7 398.3,621.0 390.5,595.0C388.4,588.1 385.6,578.5 384.3,573.5C383.0,568.5 380.6,560.3 378.9,555.1C377.3,550.0 374.8,541.6 373.5,536.4C370.7,525.5 368.7,521.3 361.3,510.8C355.2,502.1 348.3,495.6 340.6,491.3C334.7,488.0 331.6,487.9 288.5,489.4C267.6,490.1 262.9,490.6 260.0,492.1C258.1,493.1 250.2,499.6 242.5,506.6C221.3,525.7 211.9,532.3 192.0,541.8C177.4,548.8 170.9,553.3 159.2,564.3C153.6,569.6 146.5,575.7 143.3,577.8C134.9,583.6 127.1,592.1 120.0,603.3C114.0,612.7 110.0,622.5 110.0,627.7C110.0,630.9 112.6,639.9 115.5,647.0C117.7,652.2 119.7,664.1 119.1,668.5C118.8,671.2 115.4,680.2 112.9,685.3C107.9,695.1 94.2,709.1 86.7,711.9C82.2,713.6 70.9,713.2 64.7,711.1C55.1,707.8 37.3,698.1 34.1,694.5C32.4,692.6 30.6,689.1 30.0,686.8C29.4,684.4 28.0,680.0 26.9,677.0C24.3,670.0 23.5,660.3 24.9,652.0C26.0,645.6 27.4,642.3 34.4,629.8C38.4,622.7 39.0,620.1 43.0,593.0C46.2,571.5 47.7,568.9 63.0,558.0C66.5,555.5 71.8,550.5 74.8,546.7C77.8,543.0 80.6,540.0 81.1,540.0C81.8,540.0 83.8,537.7 99.3,519.1C102.7,515.0 108.1,508.7 111.3,505.1C114.5,501.5 120.4,494.0 124.3,488.6C138.7,468.6 165.8,440.6 204.0,406.5C219.9,392.3 226.2,387.4 235.0,382.6C242.0,378.9 259.3,371.7 267.5,369.3C274.5,367.2 276.5,366.0 284.5,359.4C297.6,348.6 318.0,341.1 345.0,337.0C352.4,335.9 359.2,334.7 360.0,334.4C360.8,334.1 368.0,333.5 376.0,333.0L390.5,332.2L405.3,325.1C415.6,320.1 422.1,317.7 426.7,317.0C435.9,315.5 438.5,314.2 448.8,305.8C458.0,298.3 464.9,295.0 474.5,293.4C487.7,291.2 491.2,282.0 484.9,266.3C480.8,256.0 479.0,247.3 479.0,237.5C479.0,227.0 478.0,224.0 472.6,217.7C467.6,211.8 462.8,202.9 461.0,196.0C460.4,193.5 458.5,186.6 456.8,180.6C453.3,168.2 453.5,166.2 459.4,156.5L462.7,151.1L462.5,120.8C462.3,104.1 462.6,88.2 463.1,85.5C464.6,77.0 471.2,65.2 478.8,57.8C485.4,51.2 497.8,42.0 505.5,37.9C512.8,33.9 533.4,26.8 544.4,24.4C553.3,22.5 556.1,22.3 560.4,23.1C563.2,23.6 571.1,24.4 578.0,24.9C589.8,25.7 590.9,25.9 598.5,29.7C602.9,31.9 608.8,34.5 611.6,35.4C614.4,36.3 618.6,38.7 620.9,40.6C623.2,42.6 626.2,44.5 627.7,44.9C629.2,45.3 630.8,46.5 631.4,47.5C632.0,48.6 634.8,52.0 637.5,55.1C643.1,61.5 650.5,74.7 651.4,80.0C653.1,90.2 653.8,111.4 653.0,130.4C652.6,141.9 652.4,152.0 652.7,152.8C653.0,153.5 655.3,155.1 657.9,156.3C664.1,159.3 666.2,164.8 665.6,177.0C664.9,192.8 659.4,204.5 648.5,213.2C639.5,220.4 638.9,222.1 637.9,241.9C636.9,260.7 637.3,263.0 642.0,265.9C644.5,267.4 648.0,267.8 661.8,268.3C671.6,268.7 681.2,269.6 685.0,270.5C694.5,272.8 706.8,279.0 732.0,294.2C744.4,301.7 758.1,309.9 762.5,312.6C773.9,319.4 782.4,326.4 792.8,337.7C803.8,349.6 808.4,355.5 815.4,366.2C821.4,375.5 840.9,413.1 844.0,421.3C846.6,428.2 851.6,432.9 862.0,438.2C869.4,442.0 871.6,443.7 879.2,452.3C890.0,464.3 905.7,485.1 908.1,490.5C909.4,493.3 910.0,496.9 910.0,502.9C910.0,509.4 910.6,513.1 913.0,520.2C916.1,529.5 925.6,549.2 934.1,564.0C939.6,573.8 944.2,584.7 947.2,595.8C949.0,602.2 949.4,606.4 949.4,621.0C949.5,640.0 948.9,643.7 943.7,655.0C940.4,662.1 939.6,663.0 936.4,663.0C935.2,663.0 931.0,664.5 926.9,666.4C919.1,670.0 887.4,681.2 873.0,685.4C868.3,686.7 860.7,688.6 856.0,689.5C851.3,690.3 840.5,692.4 832.0,694.0C818.4,696.5 804.7,698.4 784.7,700.5C781.6,700.9 778.3,701.8 777.5,702.6C775.5,704.6 775.6,708.3 777.7,712.3C778.6,714.1 781.2,721.1 783.5,728.0C791.7,752.4 799.8,775.6 801.5,779.5C802.4,781.7 806.3,789.1 810.1,796.0C813.8,802.9 818.0,811.4 819.4,815.0C820.7,818.6 823.8,825.8 826.3,831.0C831.5,842.3 840.8,870.7 844.7,887.5C847.4,899.1 847.5,900.4 847.4,925.5L847.3,951.5L844.1,961.4C840.5,972.9 840.0,983.8 842.5,998.0C843.3,1002.7 844.0,1009.6 844.1,1013.5C844.1,1017.4 844.5,1022.8 845.0,1025.5C845.5,1028.2 846.6,1039.7 847.5,1051.0C850.4,1087.2 850.8,1093.2 852.5,1112.0C853.9,1128.1 854.0,1135.1 853.0,1165.5C852.3,1188.2 851.2,1205.9 849.9,1215.8C848.8,1224.2 847.6,1240.7 847.1,1252.3C846.5,1270.7 846.1,1274.0 844.3,1277.5C843.2,1279.7 841.3,1284.8 840.1,1288.9C838.8,1293.0 836.1,1300.3 833.9,1305.0C827.7,1318.9 826.7,1325.1 826.5,1351.5C826.4,1368.0 825.9,1377.6 824.7,1385.5C823.7,1391.5 822.3,1400.5 821.5,1405.5C820.7,1410.5 819.8,1424.8 819.5,1437.5C819.0,1456.5 818.3,1463.7 815.8,1478.9C812.0,1501.7 806.5,1521.2 799.0,1538.5C796.0,1545.5 788.9,1566.9 781.4,1591.8L775.0,1613.2L774.9,1637.3C774.8,1650.6 774.7,1664.9 774.7,1669.0C774.6,1673.1 775.5,1682.3 776.8,1689.5C779.1,1702.5 779.1,1702.5 791.9,1728.5C805.8,1756.5 809.7,1767.3 814.6,1790.5C816.7,1800.3 817.5,1807.2 817.8,1818.7C818.5,1843.0 816.2,1847.1 796.2,1856.7C780.5,1864.2 768.2,1868.3 750.2,1871.9C732.8,1875.4 729.6,1875.6 722.0,1873.1ZM799.9,594.1C803.5,591.6 808.4,587.7 810.7,585.4C817.6,578.8 817.3,577.9 801.2,554.0C788.7,535.4 787.1,533.5 784.4,533.2C781.8,532.9 781.1,533.4 780.0,535.9C778.7,539.2 779.1,548.6 780.8,555.1C781.8,559.0 781.4,560.6 776.9,570.7C774.7,575.7 774.7,576.3 775.9,583.6C777.6,593.8 778.4,595.3 783.3,597.7C788.8,600.4 791.8,599.8 799.9,594.1Z"/>
+    <clipPath id="pfxClip"><rect id="pfxClipR" x="0" y="0" width="600" height="0"/></clipPath>
+    <linearGradient id="pfxGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D3122C" stop-opacity="0"/><stop offset="1" stop-color="#D3122C" stop-opacity=".38"/></linearGradient>
+  </defs>
+  <g class="pfx-ruler"><line x1="0" y1="20" x2="14" y2="20"/><line x1="0" y1="45" x2="7" y2="45"/><line x1="0" y1="70" x2="7" y2="70"/><line x1="0" y1="95" x2="7" y2="95"/><line x1="0" y1="120" x2="14" y2="120"/><line x1="0" y1="145" x2="7" y2="145"/><line x1="0" y1="170" x2="7" y2="170"/><line x1="0" y1="195" x2="7" y2="195"/><line x1="0" y1="220" x2="14" y2="220"/><line x1="0" y1="245" x2="7" y2="245"/><line x1="0" y1="270" x2="7" y2="270"/><line x1="0" y1="295" x2="7" y2="295"/><line x1="0" y1="320" x2="14" y2="320"/><line x1="0" y1="345" x2="7" y2="345"/><line x1="0" y1="370" x2="7" y2="370"/><line x1="0" y1="395" x2="7" y2="395"/><line x1="0" y1="420" x2="14" y2="420"/><line x1="0" y1="445" x2="7" y2="445"/><line x1="0" y1="470" x2="7" y2="470"/><line x1="0" y1="495" x2="7" y2="495"/><line x1="0" y1="520" x2="14" y2="520"/><line x1="0" y1="545" x2="7" y2="545"/><line x1="0" y1="570" x2="7" y2="570"/><line x1="0" y1="595" x2="7" y2="595"/><line x1="0" y1="620" x2="14" y2="620"/></g>
+  <svg x="152" y="20" width="296" height="600" viewBox="0 0 976 1980" class="pfx-ghost"><use href="#pfxBody"/></svg>
+  <g clip-path="url(#pfxClip)"><svg x="152" y="20" width="296" height="600" viewBox="0 0 976 1980" class="pfx-solid"><use href="#pfxBody"/></svg></g>
+  <g id="pfxScan" class="pfx-scan"><rect x="40" y="-70" width="520" height="70" fill="url(#pfxGlow)"/><line x1="40" y1="0" x2="560" y2="0"/><text x="560" y="-8" text-anchor="end" id="pfxPct">000</text></g>
+  <g class="pfx-hs" data-h="1"><circle class="pfx-pulse" cx="341" cy="43" r="10"/><circle class="pfx-core" cx="341" cy="43" r="7"/></g><g class="pfx-hs" data-h="2"><circle class="pfx-pulse" cx="365" cy="191" r="10"/><circle class="pfx-core" cx="365" cy="191" r="7"/></g><g class="pfx-hs" data-h="3"><circle class="pfx-pulse" cx="324" cy="356" r="10"/><circle class="pfx-core" cx="324" cy="356" r="7"/></g>
+  <g class="pfx-ats"><g class="pfx-at" style="--i:0"><line x1="352" y1="60" x2="498" y2="68"/><circle class="pfx-atr" cx="498" cy="68" r="34"/><svg x="476" y="46" width="44" height="44" viewBox="0 0 100 100"><path d="M30 94 V74 C17 66 12 53 12 40 C12 19 29 6 50 6 C72 6 86 21 86 40 L94 55 L86 57 V67 C86 73 82 76 76 76 H66 V94 Z" fill="currentColor"/><circle cx="40" cy="34" r="11" fill="none" stroke="var(--ink)" stroke-width="7" stroke-dasharray="4.3 3.4"/><circle cx="40" cy="34" r="6" fill="var(--ink)"/><circle cx="40" cy="34" r="3" fill="currentColor"/><circle cx="57" cy="52" r="8" fill="none" stroke="var(--ink)" stroke-width="6" stroke-dasharray="3.6 2.9"/><circle cx="57" cy="52" r="4.5" fill="var(--ink)"/><circle cx="57" cy="52" r="2" fill="currentColor"/></svg><text x="498" y="126" text-anchor="middle">Cognitivos</text></g><g class="pfx-at" style="--i:1"><line x1="318" y1="80" x2="86" y2="124"/><circle class="pfx-atr" cx="86" cy="124" r="34"/><svg x="64" y="102" width="44" height="44" viewBox="0 0 100 100"><path d="M30 94 V74 C17 66 12 53 12 40 C12 19 29 6 50 6 C72 6 86 21 86 40 L94 55 L86 57 V67 C86 73 82 76 76 76 H66 V94 Z" fill="currentColor"/><path d="M26 40 C24 28 34 19 45 21 C50 14 64 15 67 24 C76 25 79 35 74 42 C78 49 72 58 64 56 C60 63 49 63 46 57 C37 60 28 54 30 47 C25 46 24 42 26 40 Z" fill="var(--ink)"/><path d="M46 22 C44 30 50 34 47 41 C44 48 48 52 46 57 M33 33 C38 33 40 37 38 41 M58 26 C55 33 61 36 58 42 M66 46 C61 46 59 50 61 54" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><text x="86" y="182" text-anchor="middle">Mentais</text></g><g class="pfx-at" style="--i:2"><line x1="300" y1="250" x2="64" y2="278"/><circle class="pfx-atr" cx="64" cy="278" r="34"/><svg x="42" y="256" width="44" height="44" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="4"><rect x="4" y="22" width="92" height="56"/><path d="M50 22 V78"/><circle cx="50" cy="50" r="10"/><rect x="4" y="36" width="14" height="28"/><rect x="82" y="36" width="14" height="28"/></g><circle cx="50" cy="50" r="3" fill="currentColor"/></svg><text x="64" y="336" text-anchor="middle">Táticos</text></g><g class="pfx-at" style="--i:3"><line x1="400" y1="380" x2="504" y2="408"/><circle class="pfx-atr" cx="504" cy="408" r="34"/><svg x="482" y="386" width="44" height="44" viewBox="0 0 100 100"><g fill="currentColor"><rect x="4" y="44" width="8" height="12" rx="2"/><rect x="13" y="30" width="11" height="40" rx="3"/><rect x="26" y="36" width="9" height="28" rx="3"/><rect x="35" y="45" width="30" height="10"/><rect x="65" y="36" width="9" height="28" rx="3"/><rect x="76" y="30" width="11" height="40" rx="3"/><rect x="88" y="44" width="8" height="12" rx="2"/></g></svg><text x="504" y="466" text-anchor="middle">Físicos</text></g><g class="pfx-at" style="--i:4"><line x1="205" y1="560" x2="88" y2="568"/><circle class="pfx-atr" cx="88" cy="568" r="34"/><svg x="66" y="546" width="44" height="44" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="currentColor"/><circle cx="50" cy="50" r="38" fill="var(--ink)"/><path d="M50 36 L63 45 L58 61 L42 61 L37 45 Z" fill="currentColor"/><path d="M50 36 V13 M63 45 L85 38 M58 61 L71 80 M42 61 L29 80 M37 45 L15 38" stroke="currentColor" stroke-width="4"/><path d="M42 6 L58 6 L56 14 L44 14 Z M88 34 L94 48 L86 50 L83 38 Z M12 34 L6 48 L14 50 L17 38 Z M66 86 L76 78 L80 86 L70 94 Z M34 86 L24 78 L20 86 L30 94 Z" fill="currentColor"/></svg><text x="88" y="626" text-anchor="middle">Técnicos</text></g></g>
+</svg></div>
+      <div class="pfx-text"><div class="pfx-fr pfx-f0" data-f="0"><p class="eyebrow">Metodologia · Perfil de jogador</p><h2 class="h2 pfx-h">Perfil competitivo, por posição.</h2><p class="pfx-lead">Três traços que definem o jogador do Inter. Role ou clique para fazer a leitura.</p></div><div class="pfx-fr " data-f="1"><p class="pfx-k"><span>01</span> · Leitura</p><h3 class="pfx-big">Método Inter</h3><p class="pfx-q">Entendimento de jogo dentro do Método Inter.</p></div><div class="pfx-fr " data-f="2"><p class="pfx-k"><span>02</span> · Leitura</p><h3 class="pfx-big">Raízes coloradas</h3><p class="pfx-q">Formação com a cultura e raízes de um colorado.</p></div><div class="pfx-fr " data-f="3"><p class="pfx-k"><span>03</span> · Leitura</p><h3 class="pfx-big">Alto rendimento</h3><p class="pfx-q">Detentor das valências físicas e mentais necessárias para performar em alto rendimento.</p></div><div class="pfx-fr " data-f="4"><p class="pfx-k">Atributos por posição</p><p class="pfx-q pfx-q2">O Inter irá ampliar a marca <b>Celeiro de Ases</b> para uma produção de jogadores com perfil competitivo e com os atributos necessários para performar em alto nível, por posição.</p><ul class="pfx-list"><li>Técnicos</li><li>Físicos</li><li>Cognitivos</li><li>Mentais</li><li>Táticos</li></ul><p class="pfx-seal">Celeiro de Ases · por posição</p></div></div>
     </div>
   </div>
 </div>
@@ -1011,7 +1079,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
     el.style.transformOrigin='50% 50%';el.style.transform='scale('+sc.toFixed(4)+')';
     return sc;
   }
-  var FRAMED={prop:1,bola:1,elenco:1,close:1};
+  var FRAMED={hero:1,prop:1,bola:1,elenco:1,close:1};
   /* cada quadro cabe inteiro na área visível: o conteúdo vai numa caixa que encolhe só o necessário */
   $$('.frame').forEach(function(f){
     var box=document.createElement('div');box.className='fbox';
@@ -1028,7 +1096,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   }
   function layout(a){
     if(a===undefined)a=saveAnchor();
-    cine=!/[?&]estatico\b/.test(location.search) && VH>=460 && VH<=2600;
+    cine=!/[?&]estatico\b/.test(location.search) && VH>=360 && VH<=2600;
     root.classList.toggle('cine',cine);
     Object.keys(pins).forEach(function(k){
       var pin=pins[k];
@@ -1039,7 +1107,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
       if(k==='hero')inner=st.querySelector('.hero-in');
       unfit(inner);
       if(FRAMED[k])return;
-      var scs=getComputedStyle(st), avail=st.clientHeight-parseFloat(scs.paddingTop)-parseFloat(scs.paddingBottom);
+      var avail=st.clientHeight-30;
       if(inner.scrollHeight<=avail)return;
       pin.classList.add('tight');
       if(inner.scrollHeight<=avail)return;
@@ -1079,12 +1147,12 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   var propFrames=$$('#propFrames .frame');
   function prop(p){
     var loc=xfade(propFrames,p,60);
-    fillWords(propW,clamp(loc[0]/0.5)); fillWords(teseW,clamp(loc[1]/0.45));
+    fillWords(propW,clamp(loc[0]/0.6)); fillWords(teseW,clamp(loc[1]/0.45));
     dotsOn(pins.prop,Math.min(2,Math.floor(p*3)));
   }
   var pilLayers=$$('#pilLayers .layer'), pilBars=$$('.lbar i',pins.pilares);
   function pilares(p){var loc=xfade(pilLayers,p,60);loc.forEach(function(l,k){pilBars[k].style.transform='scaleX('+l.toFixed(3)+')';});}
-  var PR=[['Construção vertical','Progredir rápido e quebrar as linhas do adversário.'],['Saída curta','Construir o jogo desde o tiro de meta.'],['Pós-perda agressivo','Perdeu a bola, vai buscar na hora.'],['Contra-ataque','Recuperou, acelera rumo ao gol.'],['Pressão constante','Agressividade permanente sobre quem tem a bola.'],['Marcação alta','Não deixar o adversário sair jogando curto.']];
+  var PR=[['Construção vertical','Progredir rápido e quebrar as linhas do adversário.'],['Saída curta sem risco','Construir o jogo desde o tiro de meta.'],['Pós-perda agressivo','Perdeu a bola, vai buscar na hora.'],['Contra-ataque','Recuperou, acelera rumo ao gol.'],['Pressão constante','Agressividade permanente sobre quem tem a bola.'],['Marcação alta','Não deixar o adversário sair jogando curto.']];
   var pcap=$('#pcap'), lastPr=0;
   function setPrinc(n){
     if(n===lastPr)return; lastPr=n;
@@ -1154,9 +1222,9 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
     var loc=xfade(elFrames,p,60);
     /* ao chegar no quadro, ele se preenche inteiro de uma vez (cascata rápida), sem depender do quanto rolou */
     for(var k=1;k<elFrames.length;k++){
-      var op=parseFloat(elFrames[k].style.opacity)||0;
-      if(op>0.3&&!fState[k]){fState[k]=1;fillFrame(k);}
-      else if(op<0.05&&loc[k]===0&&fState[k]){fState[k]=0;fDots[k].forEach(function(d){d.style.transitionDelay='0s';d.classList.remove('on');});$$('.dn[data-to]',elFrames[k]).forEach(function(n){n.textContent=numText(n,0);});}
+      var on=loc[k]>0.2&&loc[k]<1.05;
+      if(on&&!fState[k]){fState[k]=1;fillFrame(k);}
+      else if(loc[k]<0.08&&fState[k]){fState[k]=0;fDots[k].forEach(function(d){d.style.transitionDelay='0s';d.classList.remove('on');});$$('.dn[data-to]',elFrames[k]).forEach(function(n){n.textContent=numText(n,0);});}
     }
     dotsOn(pins.elenco,Math.min(elFrames.length-1,Math.floor(p*elFrames.length)));
   }
@@ -1184,6 +1252,18 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
     var cur=Math.min(4,Math.floor(p*5));
     radTxt.forEach(function(t,k){t.classList.toggle('cur',k===cur);});
   }
+  var pfxPin=pins.perfil, pfxScan=$('#pfxScan'), pfxClip=$('#pfxClipR'), pfxPct=$('#pfxPct'), pfxHs=$$('.pfx-hs'), pfxFr=$$('.pfx-fr'), pfxLast=-1;
+  var PFX=[[0,-40],[.12,-40],[.28,62],[.5,212],[.72,378],[.86,640],[1,640]], PFXH=[43,191,356];
+  function pfxY(p){for(var i=1;i<PFX.length;i++){if(p<=PFX[i][0]){var a=PFX[i-1],b=PFX[i],t=(p-a[0])/Math.max(1e-6,b[0]-a[0]);return a[1]+(b[1]-a[1])*t;}}return 640;}
+  function perfil(p){
+    var y=pfxY(p), idx=p<.17?0:p<.39?1:p<.61?2:p<.81?3:4;
+    pfxScan.setAttribute('transform','translate(0,'+y.toFixed(1)+')');
+    pfxScan.style.opacity=(y<-20||y>=640)?0:1;
+    pfxClip.setAttribute('height',Math.max(0,Math.min(640,y)).toFixed(1));
+    pfxPct.textContent=('00'+Math.round(clamp(y/620)*100)).slice(-3);
+    pfxHs.forEach(function(g,k){g.classList.toggle('on',y>=PFXH[k]-4);g.classList.toggle('cur',idx===k+1);});
+    if(idx!==pfxLast){pfxLast=idx;pfxFr.forEach(function(f,k){f.classList.toggle('on',k===idx);});pfxPin.classList.toggle('done',idx===4);}
+  }
   function gov(p){stepsOn(pins.gov,1+Math.min(7,Math.floor(clamp(p/0.88)*8)));}
   function close(p){fillWords(closeW,clamp((p-0.04)/0.8));}
 
@@ -1204,7 +1284,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
       if(on){var box=a.parentNode,l=a.offsetLeft-box.offsetLeft;if(l<box.scrollLeft||l+a.offsetWidth>box.scrollLeft+box.clientWidth){var L=Math.max(0,l-20);if(box.scrollTo)box.scrollTo({left:L,behavior:rm.matches?'auto':'smooth'});else box.scrollLeft=L;}}
     });
   }
-  var SCENES=[['hero',hero],['prop',prop],['base',base],['pilares',pilares],['princ',princ],['bola',bola],['form',form],['saci',saci],['trans',trans],['elenco',elenco],['dev',dev],['gov',gov],['close',close]];
+  var SCENES=[['hero',hero],['prop',prop],['base',base],['pilares',pilares],['princ',princ],['bola',bola],['form',form],['saci',saci],['trans',trans],['elenco',elenco],['perfil',perfil],['dev',dev],['gov',gov],['close',close]];
   function update(){
     var max=document.documentElement.scrollHeight-VH;
     progBar.style.transform='scaleX('+(max>0?clamp(window.scrollY/max):0).toFixed(4)+')';
@@ -1222,7 +1302,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   function fr(n,span){var o=[];for(var k=0;k<n;k++)o.push((k+0.5)/n*(span||1));return o;}
   function st(n,span){var o=[];for(var k=1;k<=n;k++)o.push(Math.min(0.97,(k-0.5)/n*span));o[o.length-1]=Math.max(o[o.length-1],0.93);return o;}
   var STOPS={hero:[0,.97],prop:fr(3),pilares:fr(4),princ:st(6,.85),bola:fr(4),form:st(4,.9),
-    saci:fr(4,.74).concat([.985]),trans:st(4,.9),elenco:fr(4),base:st(8,.85),dev:fr(5),gov:st(8,.88),close:[0,.9]};
+    saci:fr(4,.74).concat([.985]),trans:st(4,.9),elenco:fr(4),perfil:[.06,.28,.5,.72,.94],base:st(8,.85),dev:fr(5),gov:st(8,.88),close:[0,.9]};
   function allStops(){
     var out=[],H=VH-NAV,maxY=document.documentElement.scrollHeight-VH;
     $$('main > *').forEach(function(e){
@@ -1287,17 +1367,6 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   });
   $('#stepPrev').addEventListener('click',function(){stopAuto();go(-1);});
   $('#stepNext').addEventListener('click',function(){stopAuto();go(1);});
-  /* links do menu levam à primeira parada do capítulo (quadro completo), não ao início da cena */
-  navLinks.concat([$('.brand')]).forEach(function(a){
-    a.addEventListener('click',function(e){
-      var t=document.querySelector(a.getAttribute('href'));
-      if(!cine||!t)return;
-      e.preventDefault();stopAuto();
-      var k=t.getAttribute('data-pin'),top=t.getBoundingClientRect().top+window.scrollY-NAV,y=top;
-      if(k&&t.classList.contains('pinned')&&STOPS[k])y=top+(t.offsetHeight-(VH-NAV))*STOPS[k][0];
-      navT=Math.round(Math.max(0,Math.min(document.documentElement.scrollHeight-VH,y)));navAt=Date.now();smoothTo(navT);
-    });
-  });
 
   /* modo apresentação: avança sozinho; qualquer gesto devolve o controle */
   var autoT=null,playBtn=$('#stepPlay'),playLab=$('#stepPlayLab');
@@ -1305,7 +1374,7 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   function startAuto(){playBtn.setAttribute('aria-pressed','true');playLab.textContent='Pausar';navT=null;autoT=setTimeout(autoStep,600);}
   function stopAuto(){if(autoT===null&&playBtn.getAttribute('aria-pressed')==='false')return;clearTimeout(autoT);autoT=null;playBtn.setAttribute('aria-pressed','false');playLab.textContent='Apresentar';}
   playBtn.addEventListener('click',function(){if(playBtn.getAttribute('aria-pressed')==='true')stopAuto();else startAuto();});
-  ['wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,function(e){if(ev==='wheel'||!(e.target.closest&&e.target.closest('.stepnav')))stopAuto();},{passive:true});});
+  ['wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,function(){stopAuto();},{passive:true});});
   document.addEventListener('mousedown',function(e){if(!e.target.closest('.stepnav'))stopAuto();});
   document.addEventListener('visibilitychange',function(){if(document.hidden)stopAuto();});
 
@@ -1333,8 +1402,6 @@ h1,h2,h3,.statement,.big-word{overflow-wrap:break-word}
   setVars();
   layout(null);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){relayout();});
-  /* a folha de fontes carrega sem bloquear: reajusta quando as fontes chegam */
-  if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener('loadingdone',function(){relayout();});
 })();
 </script>
 </body>
